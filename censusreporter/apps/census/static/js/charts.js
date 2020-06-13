@@ -107,7 +107,7 @@ function Chart(options) {
         }
         
         // add blank hovercard
-        chart.initHovercard()
+        //chart.initHovercard()
 
         // time to make the chart
         chart.draw();
@@ -1078,51 +1078,51 @@ function Chart(options) {
 
         // ensure we have hovercard so other interactions can safely call this
         if (!!chart.hovercard) {
-            chart.hovercard
-                .html(chart.fillHovercard(data))
-                .style("opacity", 1);
-
-            chart.hovercard.dimensions = {
-                height: chart.hovercard.node().offsetHeight,
-                width: chart.hovercard.node().offsetWidth
-            }
+            // chart.hovercard
+            //     .html(chart.fillHovercard(data))
+            //     .style("opacity", 1);
+            //
+            // chart.hovercard.dimensions = {
+            //     height: chart.hovercard.node().offsetHeight,
+            //     width: chart.hovercard.node().offsetWidth
+            // }
         }
     }
 
     chart.mousemove = function() {
         var mouseTop = d3.mouse(this)[1],
-            mouseLeft = d3.mouse(this)[0],
-            bufferTop = chart.screenPosition.top + mouseTop - chart.hovercard.dimensions.height - 10,
-            bufferRight = browserWidth - (chart.screenPosition.left + mouseLeft + chart.hovercard.dimensions.width) - 10;
+            mouseLeft = d3.mouse(this)[0]
+            // bufferTop = chart.screenPosition.top + mouseTop - chart.hovercard.dimensions.height - 10,
+            // bufferRight = browserWidth - (chart.screenPosition.left + mouseLeft + chart.hovercard.dimensions.width) - 10;
 
-        chart.hovercard.position = {
-            vertical: {
-                direction: (bufferTop < 10) ? 'top' : 'bottom',
-                pixels: (bufferTop < 10) ? mouseTop + 5 : chart.dimensions.height - mouseTop + 5
-            },
-            horizontal: {
-                direction: (bufferRight < 10) ? 'right' : 'left',
-                pixels: (bufferRight < 10) ? chart.dimensions.width - mouseLeft + 5 : mouseLeft + 5
-            }
-        }
+        // chart.hovercard.position = {
+        //     vertical: {
+        //         direction: (bufferTop < 10) ? 'top' : 'bottom',
+        //         pixels: (bufferTop < 10) ? mouseTop + 5 : chart.dimensions.height - mouseTop + 5
+        //     },
+        //     horizontal: {
+        //         direction: (bufferRight < 10) ? 'right' : 'left',
+        //         pixels: (bufferRight < 10) ? chart.dimensions.width - mouseLeft + 5 : mouseLeft + 5
+        //     }
+        // }
         // asking for chart.hovercard.style("height") and chart.hovercard.style("width")
         // gives inconsistent results because of IE box model. So we can't count on addition
         // using hovercard height and width. Instead, we reset top/bottom and left/right
         // (in case of flips, we don't want to hold onto the old value) and position based
         // on proximity to screen edge.
-        chart.hovercard
-            .style("left", "auto").style("right", "auto")
-            .style(chart.hovercard.position.horizontal.direction, (chart.hovercard.position.horizontal.pixels) + "px")
-            .style("top", "auto").style("bottom", "auto")
-            .style(chart.hovercard.position.vertical.direction, (chart.hovercard.position.vertical.pixels) + "px");
+        // chart.hovercard
+        //     .style("left", "auto").style("right", "auto")
+        //     .style(chart.hovercard.position.horizontal.direction, (chart.hovercard.position.horizontal.pixels) + "px")
+        //     .style("top", "auto").style("bottom", "auto")
+        //     .style(chart.hovercard.position.vertical.direction, (chart.hovercard.position.vertical.pixels) + "px");
     }
 
     chart.mouseout = function() {
         // ensure we have hovercard so other interactions can safely call this
-        if (!!chart.hovercard) {
-            chart.hovercard
-                .style("opacity", 1e-6);
-        }
+        // if (!!chart.hovercard) {
+        //     chart.hovercard
+        //         .style("opacity", 1e-6);
+        // }
     }
     
     chart.addChartTitle = function(container) {

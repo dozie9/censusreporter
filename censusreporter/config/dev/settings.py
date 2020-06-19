@@ -7,6 +7,8 @@ WSGI_APPLICATION = "config.dev.wsgi.application"
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
+    'dozie.com.ng',
+    '116.203.85.174',
 ]
 
 # API_URL = 'http://0.0.0.0:5000'

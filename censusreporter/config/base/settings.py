@@ -56,6 +56,7 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 'census.context_processors.api_url',
+                'django.template.context_processors.request',
             ],
         },
     },

@@ -1230,7 +1230,7 @@ function Chart(options) {
             chart.settings[setting] = newSettings[setting]
         }
     }
-    
+    // CHANGE COLOR HERE
     // Colorbrewer color specifications and designs
     // by Cynthia Brewer (http://colorbrewer.org/)
     // https://github.com/mbostock/d3/tree/master/lib/colorbrewer
@@ -1239,7 +1239,8 @@ function Chart(options) {
         // saturated version of Colorbrewer 'Set2' scheme, so the unhovered
         // state, at 80% opacity, looks like the original colorbrewer color
         Set2S: ['#33b5b5', '#ed8b69', '#6295cc', '#dd85c0', '#8ecc23', '#fccd06', '#dbba97', '#aaaaaa']
-        
+        // Set2S: ['#f7fcfd', '#e0ecf4', '#bfd3e6', '#9ebcda', '#8c96c6', '#8c6bb1', '#88419d', '#6e016b']
+
     };
     
     chart.comparisonPhrases = {

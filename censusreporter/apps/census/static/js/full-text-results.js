@@ -30,21 +30,21 @@ function fulltextDataRequest(API_URL, request_term, profile, table, topic) {
                         label: data.results[i].full_name,
                         value: data.results[i].full_name,
                         subline: "<i class='fa fa-bar-chart-o dingbat'></i> " + data.results[i].sumlevel_name,
-                        url: data.results[i].url
+                        url: data.results[i].url.replace("https://censusreporter.org", HOST)
                     });
                 } else if (table && data.results[i].type == "table") {
                     formatted.push({
                         label: data.results[i].table_id + ': ' + data.results[i].table_name,
                         value: data.results[i].table_name,
                         subline: "<i class='fa fa-table dingbat'></i> <b>Table topics: </b>" + data.results[i].topics.join(", "),
-                        url: data.results[i].url
+                        url: data.results[i].url.replace("https://censusreporter.org", HOST)
                     });
                 } else if (topic && data.results[i].type == "topic") {
                     formatted.push({
                         label: data.results[i].topic_name,
                         value: data.results[i].topic_name,
                         subline: "<i class='fa fa-book dingbat'></i> Documentation",
-                        url: data.results[i].url
+                        url: data.results[i].url.replace("https://censusreporter.org", HOST)
                     });
                 }
             }

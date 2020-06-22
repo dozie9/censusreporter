@@ -13,8 +13,8 @@
     <meta property="og:description"
           content="Census data for {{ geography.this.full_name }} (pop. {{ geography.this.total_population|intcomma }}), including age, race, sex, income, poverty, marital status, education and more."/>
     <meta property="og:type" content="article"/>
-    {#}
-    <meta property="og:image" content=""/>{#}
+
+    <meta property="og:image" content=""/>
     <link rel="canonical" href="{{ canonical_url }}"/>
 {% endblock %}
 
@@ -26,8 +26,8 @@
           content="Census profile: {% firstof geography.this.full_name geography.this.short_name %}">
     <meta name="twitter:description"
           content="Census data for {{ geography.this.full_name }} (pop. {{ geography.this.total_population|intcomma }}), including age, race, sex, income, poverty, marital status, education and more.">
-    {#}
-    <meta name="twitter:image" content="">{#}
+
+    <meta name="twitter:image" content="">
 {% endblock %}
 
 
@@ -53,9 +53,10 @@
             <article class="clearfix column-half">
                 <header id="header-box" class="column-full">
                     <h1 class="title">{% firstof geography.this.full_name geography.this.short_name %}</h1>
+                {% comment %}
                     {% if geography.this.sumlevel != '010' %}
                         <p class="caption"></p>
-                    {% endif %}
+                    {% endif %}{% endcomment %}
                 </header>
                 <div class="column-half">
                     <div class="stat">
@@ -65,7 +66,7 @@
                     </span>
                     </div>
                 </div>
-                {% if geo_metadata.square_miles or geo_metadata.population_density %}
+                {% comment %}{% if geo_metadata.square_miles or geo_metadata.population_density %}
                     <div class="column-half">
                         <div class="stat">
                     <span class="secondary">
@@ -80,22 +81,25 @@
                     </span>
                         </div>
                     </div>
-                {% endif %}
+                {% endif %}{% endcomment %}
+                <div class="column-half">
+                    {% include 'profile/_blocks/_stat_list.html' with stat=economics.income.median_household_income stat_type='dollar' %}
+                </div>
 
                 {% if geography.this.show_extra_links %}
                     {% include "profile/_blocks/_header_extra_links.html" %}
                 {% endif %}
 
-                <div class="column-full">
+                {% comment %}<div class="column-full">
                     <p class="caption"><strong>Census data:</strong> {{ geography.census_release }} unless noted</p>
-                </div>
+                </div>{% endcomment %}
             </article>
         </div>
     </div>
 {% endblock %}
 
 {% block content %}
-    <section class="clearfix" id="query-topic-picker">
+    {% comment %}<section class="clearfix" id="query-topic-picker">
         <h2>Find data for this place</h2>
         <div class="typeahead-container">
             <input name="topic_select" id="topic-select" type="text" placeholder="Search by table or column name..."
@@ -105,7 +109,7 @@
 
     <p class="explain">Interact with charts and statistics for <span class="glossary-term"
                                                                      data-keyword="margin-of-error">margins of error</span>
-        and additional information.</p>
+        and additional information.</p>{% endcomment %}
 
     <article id="top-real-estate" class="clearfix">
         <header class="section-contents">
@@ -127,9 +131,9 @@
                 <table width="100%">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Transactions</th>
-                        <th>Avg Price</th>
+                        <th class="text-left">Name</th>
+                        <th class="text-left">Transactions</th>
+                        <th class="text-left">Avg Price</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -150,13 +154,11 @@
                 <aside></aside>
 
                 <div class="column-third">
-                    <h2 class="header-for-columns"><a class="permalink" href="#sex" id="">Sex <i class="fa fa-link"></i></a>
-                    </h2>
+{#                    <h2 class="header-for-columns"><a class="permalink" href="#sex" id="">Sex <i class="fa fa-link"></i></a></h2>#}
 
                 </div>
                 <div class="column-two-thirds">
-                    <h2 class="header-for-columns"><a class="permalink" href="#race" id="">Race &amp; Ethnicity <i
-                            class="fa fa-link"></i></a></h2>
+{#                    <h2 class="header-for-columns"><a class="permalink" href="#race" id="">Race &amp; Ethnicity <i class="fa fa-link"></i></a></h2>#}
 
                 </div>
             </section>
@@ -173,7 +175,7 @@
             <section class="clearfix stat-row">
                 <h2 class="header-for-columns"><a class="permalink" href="#age" id="age">Age <i class="fa fa-link"></i></a>
                 </h2>
-                <aside></aside>
+{#                <aside></aside>#}
                 <div class="column-quarter">
                     {% include 'profile/_blocks/_stat_list.html' with stat=demographics.age.median_age.total stat_type='number' %}
                 </div>
@@ -185,11 +187,13 @@
             </section>
 
             <section class="clearfix stat-row">
-                <aside></aside>
+{#                <aside></aside>#}
                 <div class="column-third">
-                    <h2 class="header-for-columns"><a class="permalink" href="#sex" id="sex">Sex <i
+                    {% comment %}<h2 class="header-for-columns"><a class="permalink" href="#sex" id="sex">Sex <i
                             class="fa fa-link"></i></a></h2>
-                    <div id="chart-pie-demographics-sex" data-stat-type="percentage" data-initial-sort="-value"></div>
+                    <div id="chart-pie-demographics-sex" data-stat-type="percentage" data-initial-sort="-value"></div>{% endcomment %}
+                    <div id="chart-pie-families-households-distribution" data-stat-type="percentage"
+                     data-initial-sort="-value" data-chart-title="Population by household type"></div>
                 </div>
                 <div class="column-two-thirds">
                     <h2 class="header-for-columns"><a class="permalink" href="#race" id="race">Race &amp; Ethnicity <i
@@ -211,8 +215,8 @@
 
             <section class="clearfix stat-row">
                 <h2><a class="permalink" href="#income" id="income">Income <i class="fa fa-link"></i></a></h2>
-                <aside>
-                </aside>
+{#                <aside>#}
+{#                </aside>#}
                 <div class="column-quarter">
                     {% include 'profile/_blocks/_stat_list.html' with stat=economics.income.per_capita_income_in_the_last_12_months stat_type='dollar' %}
                 </div>
@@ -223,7 +227,7 @@
                      data-chart-title="Household income" data-stat-type="scaled-percentage"></div>
             </section>
 
-            <section class="clearfix stat-row">
+            {% comment %}<section class="clearfix stat-row">
                 <h2><a class="permalink" href="#poverty" id="poverty">Poverty <i class="fa fa-link"></i></a></h2>
                 <aside>
                 </aside>
@@ -247,13 +251,13 @@
                 <div class="column-two-thirds" id="chart-histogram-economics-employment-transportation_distribution"
                      data-chart-title="Means of transportation to work" data-stat-type="scaled-percentage"
                      data-qualifier="Universe: {{ economics.employment.transportation_distribution.metadata.universe }}"></div>
-            </section>
+            </section>{% endcomment %}
 
         </div>
     </article>
 
 
-    <article id="families" class="clearfix">
+    {% comment %}<article id="families" class="clearfix">
         <header class="section-contents">
             <h1>Families</h1>
         </header>
@@ -299,7 +303,7 @@
             </section>
 
         </div>
-    </article>
+    </article>{% endcomment %}
 
 
     <article id="housing" class="clearfix">
@@ -309,10 +313,21 @@
         <div class="section-container">
 
             <section class="clearfix stat-row">
+                <h2><a class="permalink" href="#housing-value" id="housing-value">Value <i class="fa fa-link"></i></a>
+                </h2>
+{#                <aside>#}
+{#                </aside>#}
+                <div class="column-third">
+                    {% include 'profile/_blocks/_stat_list.html' with stat=housing.ownership.median_value stat_type='dollar' %}
+                </div>
+                <div class="column-two-thirds" id="chart-histogram-housing-ownership-value_distribution"
+                     data-chart-title="Value of owner-occupied housing units" data-stat-type="scaled-percentage"></div>
+            </section>
+            <section class="clearfix stat-row">
                 <h2><a class="permalink" href="#housing-occupancy" id="housing-occupancy">Units &amp; Occupancy <i
                         class="fa fa-link"></i></a></h2>
-                <aside>
-                </aside>
+{#                <aside>#}
+{#                </aside>#}
                 <div class="column-third">
                     {% include 'profile/_blocks/_stat_list.html' with stat=housing.units.number stat_type='count' %}
                 </div>
@@ -322,38 +337,25 @@
                 <div class="column-third" id="chart-pie-housing-ownership-distribution" data-stat-type="percentage"
                      data-chart-title="Ownership of occupied units" data-initial-sort="-value"></div>
             </section>
-            <section class="clearfix stat-row grouped-row">
+            {% comment %}<section class="clearfix stat-row grouped-row">
                 <div class="column-third" id="chart-pie-housing-units-structure_distribution"
                      data-stat-type="percentage" data-chart-title="Types of structure" data-initial-sort="-value"></div>
                 <div class="column-two-thirds" id="chart-histogram-housing-length_of_tenure"
                      data-stat-type="scaled-percentage"
                      data-chart-title="Year moved in, by percentage of population"></div>
             </section>
-
-            <section class="clearfix stat-row">
-                <h2><a class="permalink" href="#housing-value" id="housing-value">Value <i class="fa fa-link"></i></a>
-                </h2>
-                <aside>
-                </aside>
-                <div class="column-third">
-                    {% include 'profile/_blocks/_stat_list.html' with stat=housing.ownership.median_value stat_type='dollar' %}
-                </div>
-                <div class="column-two-thirds" id="chart-histogram-housing-ownership-value_distribution"
-                     data-chart-title="Value of owner-occupied housing units" data-stat-type="scaled-percentage"></div>
-            </section>
-
             <section class="clearfix stat-row">
                 <h2><a class="permalink" href="#geographical-mobility" id="geographical-mobility">Geographical mobility
                     <i class="fa fa-link"></i></a></h2>
-                <aside>
-                </aside>
+{#                <aside>#}
+{#                </aside>#}
                 <div class="column-third">
                     {% include 'profile/_blocks/_stat_list.html' with stat=housing.migration.moved_since_previous_year stat_type='percentage' %}
                 </div>
                 <div class="column-two-thirds" id="chart-histogram-housing-migration_distribution"
                      data-stat-type="scaled-percentage"
                      data-chart-title="Population migration since previous year"></div>
-            </section>
+            </section>{% endcomment %}
 
         </div>
     </article>
@@ -383,7 +385,7 @@
                      data-qualifier="Universe: {{ social.educational_attainment_distribution.metadata.universe }}"></div>
             </section>
 
-            <section class="clearfix stat-row">
+            {% comment %}<section class="clearfix stat-row">
                 <h2><a class="permalink" href="#language" id="language">Language <i class="fa fa-link"></i></a></h2>
                 <aside>
                 </aside>
@@ -429,7 +431,7 @@
             </section>
             <p class="">Interact with charts and statistics for <span class="glossary-term"
                                                                       data-keyword="margin-of-error">margins of error</span>
-                and additional information.</p>
+                and additional information.</p>{% endcomment %}
         </div>
 
     </article>
@@ -506,7 +508,7 @@
         <div class="form-group">
             <label for="interest_rate">Interest rate</label>
             <input class="form-control" name="interest_rate" id="interest_rate" type="number"/>
-            <div class="input-overlay-text_right">%</div>
+{#            <div class="input-overlay-text_right">%</div>#}
         </div>
         <div style="display: none" id="inc_tax_div">
             <div>
@@ -558,6 +560,9 @@
 
         </div>
     </article>
+    <div class="bottom-logo">
+        <a class="title" href="/"><img src="{{ STATIC_URL }}img/placeholder.png"></a>
+    </div>
 {% endblock %}
 
 {% block body_javascript_extra %}{{ block.super }}

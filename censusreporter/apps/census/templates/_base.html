@@ -71,10 +71,7 @@
                 {% if not hide_nav_tools %}
                 <i id="menu-toggle" class="fa fa-bars"></i>
                 {% endif %}
-                <a class="title" href="{% url 'homepage' %}">
-                    <img src="{{ STATIC_URL }}img/logo.png"> Census Reporter
-                </a>
-                {% if not hide_nav_tools %}
+            {% if not hide_nav_tools %}
                 <div id="menu" class="tool-set clearfix">
                     <form action="/search">
                         <div class="tool-group">
@@ -86,10 +83,14 @@
                                 <i class="fa fa-chevron-circle-right"></i>
                                 Search
                             </a><!-- Placeholder for logo-->
-                        </div><img style="margin-left: 1em" src="https://via.placeholder.com/50?text=logo">
+                        </div>
                     </form>
                 </div>
                 {% endif %}
+                <a class="title" href="{% url 'homepage' %}">
+                    <img src="{{ STATIC_URL }}img/placeholder.png">
+                </a>
+
             </div>
         </header>
         {% block header_content %}{% endblock header_content %}

@@ -718,7 +718,7 @@ function Chart(options) {
         return chart;
     };
     
-    chart.addActionLinks = function() {
+   /* chart.addActionLinks = function() {
         chart.actionLinks = chart.chartContainer
             .append("div")
             .classed("action-links", true);
@@ -736,7 +736,7 @@ function Chart(options) {
                 .classed("chart-show-embed", true)
                 .text("Embed")
                 .on("click", chart.showEmbedCode);
-    };
+    };*/
 
     chart.getEmbedKey = function() {
         return chart.chartDataKey.substring(chart.chartDataKey.indexOf('-') + 1);

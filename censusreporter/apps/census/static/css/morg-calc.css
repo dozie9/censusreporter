@@ -118,3 +118,19 @@ input[type=number] {
 #moreLess {
     color: blue;
 }
+
+.text-left {
+    text-align: left;
+}
+
+.title {
+    margin-left: .5em;
+}
+
+.tool-set {
+    float: left;
+}
+
+#menu {
+    float: left;
+}

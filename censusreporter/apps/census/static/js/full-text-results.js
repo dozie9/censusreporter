@@ -53,7 +53,7 @@ function fulltextDataRequest(API_URL, request_term, profile, table, topic) {
         }
     });
 }
-
+/*
 function locationDataRequest(fulltext_data, request_term) {
     return $.ajax({
         url: GEOCODE_URL({
@@ -81,16 +81,16 @@ function locationDataRequest(fulltext_data, request_term) {
             return JSON.stringify(fulltext_data.concat(formatted));
         }
     });
-}
+}*/
 
 function addResultsLink(all_data, request_term) {
     var results = [
-        { // Add this as first result
-            label: "Don't see what you're looking for?",
-            value: "Don't see what you're looking for?",
-            subline: "View all search results for " + request_term,
-            url: "/search/?q=" + request_term
-        }
+        // { // Add this as first result
+        //     label: "Don't see what you're looking for?",
+        //     value: "Don't see what you're looking for?",
+        //     subline: "View all search results for " + request_term,
+        //     url: "/search/?q=" + request_term
+        // }
     ];
     return results.concat(all_data);
 }
@@ -116,12 +116,12 @@ const focus = function(event, ui) {
 
 const source = function(request, response) {
     fulltextDataRequest(API_URL, request.term, true, true, true)
-        .then(function(data) {
-            return locationDataRequest(data, request.term);
-        })
-        .then(function(data) {
-            return addResultsLink(data, request.term);
-        })
+        // .then(function(data) {
+        //     return locationDataRequest(data, request.term);
+        // })
+        // .then(function(data) {
+        //     return addResultsLink(data, request.term);
+        // })
         .then(function(data) {
             response(data);
         });
@@ -165,9 +165,9 @@ $(function() {
             // Order of last three arguments to fulltextDataRequest: profile, table, topic
             // If argument set to true, corresponding type of page is included in search result.
             fulltextDataRequest(API_URL, request.term, true, false, false)
-                .then(function(data) {
-                    return locationDataRequest(data, request.term);
-                })
+                // .then(function(data) {
+                //     return locationDataRequest(data, request.term);
+                // })
                 .then(function(data) {
                     return addResultsLink(data, request.term);
                 })

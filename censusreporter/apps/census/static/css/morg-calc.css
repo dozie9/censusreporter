@@ -1,3 +1,26 @@
+.legend {
+    /* NEW */
+    font-size: 12px;
+    /* NEW */
+}
+
+/* NEW */
+rect {
+    /* NEW */
+    stroke-width: 2;
+    /* NEW */
+}
+
+.dText {
+    fill: red;
+    font-size: 13px;
+    font-family: 'Courgette', sans-serif;
+}
+
+/*.mar {*/
+/*    margin-left: 2em;*/
+/*}*/
+
 .input-overlay-text_right {
     right: 9px;
     position: absolute;
@@ -10,10 +33,43 @@
     user-select: none;
 }
 
+
+.zsg-input-overlay_left, .zsg-input-overlay_right {
+    position: relative
+}
+
+.zsg-input-overlay_left .zsg-input-overlay-text_left, .zsg-input-overlay_left .zsg-input-overlay-text_right, .zsg-input-overlay_right .zsg-input-overlay-text_left, .zsg-input-overlay_right .zsg-input-overlay-text_right {
+    position: absolute;
+    top: 4px;
+    color: #A7A6AB;
+    speak: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.zsg-input-overlay_left .zsg-input-overlay-text_left, .zsg-input-overlay_right .zsg-input-overlay-text_left {
+    left: 9px
+}
+
+.zsg-input-overlay_left .zsg-input-overlay-text_right, .zsg-input-overlay_right .zsg-input-overlay-text_right {
+    right: 9px
+}
+
+.zsg-input-overlay_left input {
+    padding-left: 22px
+}
+
+.zsg-input-overlay_right input {
+    padding-right: 22px
+}
+
+
 .form-control {
     display: block;
     width: 100%;
-    height: calc(1.5em + .75rem + 2px);
+    height: calc(1.5em + .75rem + 2px)!important;
     padding: .375rem .75rem;
     font-size: 1rem;
     font-weight: 400;
@@ -117,13 +173,14 @@ input[type=number] {
 
 #moreLess {
     color: blue;
+    cursor: pointer;
 }
 
 .text-left {
     text-align: left;
 }
 
-.title {
+#page-header-title > .title {
     margin-left: .5em;
 }
 
@@ -134,3 +191,20 @@ input[type=number] {
 #menu {
     float: left;
 }
+
+.stat-row select {
+    max-width: 100%;
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+            .aa {
+                width: auto;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .aa {
+                width: 30%;
+            }
+        }

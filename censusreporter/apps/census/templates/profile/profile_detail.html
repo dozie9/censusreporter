@@ -119,7 +119,7 @@
 
             <section class="clearfix stat-row">
                 {#            <h2 class="header-for-columns"><a class="permalink" href="#age" id=""><i class="fa fa-link"></i></a></h2>#}
-                <aside class="one-em"><p>Here are the best real estate agent in your area</p></aside>
+{#                <aside class="one-em"><p>SurveySparrow form on homepage <a href="https://yourhome.ai">https://yourhome.ai</a></p></aside>#}
                 <p>
                     Top talent matters. The best real estate agents can sell your home faster and earn you more money.
                     The best agent can also help you save money on your new home. Most importantly, the best agents save
@@ -128,7 +128,7 @@
                     relies solely on data and our propriety algorithm. Once you submit your criteria, we will contact
                     you to learn about your goals and then connect you with the best real estate agents.
                 </p>
-                <table width="100%">
+                {% comment %}<table width="100%">
                     <thead>
                     <tr>
                         <th class="text-left">Name</th>
@@ -146,7 +146,10 @@
                 </table>
                 <div class="column-quarter">
 
-                </div>
+                </div>{% endcomment %}
+            <div>
+                <iframe width="100%" height="500" style="border:none;" src="https://yourhome.surveysparrow.com/s/website/tt-5569dc?id=front&source=homepage"></iframe>
+            </div>
 
             </section>
 
@@ -173,7 +176,7 @@
         <div class="section-container">
 
             <section class="clearfix stat-row">
-                <h2 class="header-for-columns"><a class="permalink" href="#age" id="age">Age <i class="fa fa-link"></i></a>
+                <h2 class="header-for-columns">Age
                 </h2>
 {#                <aside></aside>#}
                 <div class="column-quarter">
@@ -214,7 +217,7 @@
         <div class="section-container">
 
             <section class="clearfix stat-row">
-                <h2><a class="permalink" href="#income" id="income">Income <i class="fa fa-link"></i></a></h2>
+                <h2>Income </h2>
 {#                <aside>#}
 {#                </aside>#}
                 <div class="column-quarter">
@@ -313,7 +316,7 @@
         <div class="section-container">
 
             <section class="clearfix stat-row">
-                <h2><a class="permalink" href="#housing-value" id="housing-value">Value <i class="fa fa-link"></i></a>
+                <h2>Value
                 </h2>
 {#                <aside>#}
 {#                </aside>#}
@@ -324,8 +327,7 @@
                      data-chart-title="Value of owner-occupied housing units" data-stat-type="scaled-percentage"></div>
             </section>
             <section class="clearfix stat-row">
-                <h2><a class="permalink" href="#housing-occupancy" id="housing-occupancy">Units &amp; Occupancy <i
-                        class="fa fa-link"></i></a></h2>
+                <h2>Units &amp; Occupancy </h2>
 {#                <aside>#}
 {#                </aside>#}
                 <div class="column-third">
@@ -368,10 +370,9 @@
         <div class="section-container">
 
             <section class="clearfix stat-row">
-                <h2><a class="permalink" href="#educational-attainment" id="educational-attainment">Educational
-                    attainment <i class="fa fa-link"></i></a></h2>
-                <aside>
-                </aside>
+                <h2>Educational
+                    attainment </h2>
+
                 <div class="column-half">
                     <div class="column-half">
                         {% include 'profile/_blocks/_stat_list.html' with stat=social.educational_attainment.percent_high_school_grad_or_higher stat_type='percentage' %}
@@ -436,7 +437,7 @@
 
     </article>
 
-    <article id="school" class="clearfix">
+    {% comment %}<article id="school" class="clearfix">
         <header class="section-contents">
             <h1>School</h1>
         </header>
@@ -464,7 +465,7 @@
             </section>
 
         </div>
-    </article>
+    </article>{% endcomment %}
     <article id="calculator" class="clearfix">
         <header class="section-contents">
             <h1>Calculator</h1>
@@ -472,83 +473,95 @@
         <div class="section-container">
 
             <section class="clearfix stat-row">
-                <h2 class="header-for-columns"><a class="permalink" href="#age" id="">Morgage Calculator <i
-                        class="fa fa-link"></i></a></h2>
-                <aside><p>Here is the calculator</p></aside>
-                <p>Use our home loan calculator to estimate your mortgage payment, with taxes and insurance. Simply
-                    enter the price of the home, your down payment, and details about the home loan to calculate your
-                    mortgage payment breakdown, schedule, and more.</p>
+                <h2 class="header-for-columns">Morgage Calculator </h2>
+
+                <p>Use our home loan calculator to estimate your monthly mortgage payment, with taxes and insurance. Simply
+                    enter the price of the home, your down payment, and details about the home loan to calculate your monthly
+                    mortgage payment breakdown.</p>
                 <div class="mar row">
-    <div class="col-6-md">
-        <div class="form-group">
-            <label for="home_price">Home Price</label>
-            <input pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency" class="form-control" name="home_price"
-                   id="home_price" value="$300,000" type="text"/>
-        </div>
-        <label for="down_payment">Down Payment</label>
-        <div class="form-row">
-            <div class="col-6">
-                <input class="form-control" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" type="text"
-                       name="down_payment" id="down_payment"/>
-            </div>
-            <div class="col-6">
-                <input class="form-control" type="number"
-                       name="d_percent" id="d_percent" value="20" placeholder="%"/>
-                <div class="input-overlay-text_right">%</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="loan_program">Loan program</label>
-            <select class="form-control" name="loan_program" id="loan_program">
-                <option value="Fixed30Year">30-year fixed</option>
-                <option value="Fixed20Year">20-year fixed</option>
-                <option value="Fixed15Year">15-year fixed</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="interest_rate">Interest rate</label>
-            <input class="form-control" name="interest_rate" id="interest_rate" type="number"/>
-{#            <div class="input-overlay-text_right">%</div>#}
-        </div>
-        <div style="display: none" id="inc_tax_div">
-            <div>
-                <label for="in_pmi">Include PMI</label>
-                <input name="in_pmi" id="in_pmi" type="checkbox"/>
-            </div>
+    <div class="aa col-6-md">
             <div class="form-group">
-                <div class="form-check">
-                    <label class="form-check-label" for="inc_tax">Include taxes/Insurance</label>
-                    <input name="inc_tax" id="inc_tax" type="checkbox"/>
-                </div>
+                <label for="home_price">Home Price</label>
+                <input required pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency"
+                       placeholder="$0" class="form-control" name="home_price"
+                       id="home_price" value="$300,000" type="text"/>
             </div>
-            <label for="property_tax">Property tax</label>
-            <div class="form-row">
-                <div class="col-6">
-                    <input class="form-control" name="property_tax" id="property_tax" data-type="currency"
-                           pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" type="text"/>
-                </div>
-                <div class="col-6">
-                    <input class="form-control" name="property_tax_percent" id="property_tax_percent" value="1.1"
-                           placeholder="%"
-                           type="number"/>
-                    <div class="input-overlay-text_right">%</div>
+            <div class="form-group"><label for="down_payment">Down Payment</label>
+                <div class="form-row">
+                    <div class="col-6">
+                        <input class="form-control" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                               type="text" placeholder="$0"
+                               name="down_payment" value="$60,000" id="down_payment"/>
+                    </div>
+                    <div class="col-6">
+                        <input min="0" max="99" class="form-control" type="number"
+                               name="d_percent" id="d_percent" value="20" placeholder="0"/>
+                        <div class="input-overlay-text_right">%</div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="home_ins">Home Insurance</label>
-                <input pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency"
-                       class="form-control" value="$1,260.00" name="home_ins" id="home_ins"/>
+                <label for="loan_program">Loan program</label>
+                <select class="form-control" name="loan_program" id="loan_program">
+                    <option value="Fixed30Year">30-year fixed</option>
+                    <option value="Fixed20Year">20-year fixed</option>
+                    <option value="Fixed15Year">15-year fixed</option>
+                </select>
             </div>
             <div class="form-group">
-                <label for="hoa_dues">HOA dues</label>
-                <input pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency"
-                       class="form-control" name="hoa_dues" id="hoa_dues" value="$0"/>
+                <label for="interest_rate">Interest rate</label>
+                <div class="zsg-input-overlay_right">
+                    <input class="form-control" name="interest_rate" id="interest_rate" type="number"/>
+                    <div class="zsg-input-overlay-text_right">0</div>
+                </div>
+            </div>
+            <div style="display: none" id="inc_tax_div">
+                <!--<div>
+                    <label for="in_pmi">Include PMI</label>
+                    <input name="in_pmi" id="in_pmi" type="checkbox"/>
+                </div>-->
+                <div class="form-group">
+                    <div class="form-check">
+                        <label class="form-check-label" for="inc_tax">Include taxes/insurance</label>&nbsp;&nbsp;
+                        <input name="inc_tax" id="inc_tax" type="checkbox"/>
+                    </div>
+                </div>
+                <label for="property_tax">Property tax</label>
+                <div class="form-row">
+                    <div class="zsg-input-overlay_right form-group col-6">
+                        <input class="form-control" name="property_tax" id="property_tax" data-type="currency"
+                               pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="$3,300" type="text"/>
+                        <div class="zsg-input-overlay-text_right">/year</div>
+                    </div>
+                    <div class="form-group col-6">
+                        <input required class="form-control" name="property_tax_percent" id="property_tax_percent" value="1.10"
+                               placeholder="%"
+                               type="number"/>
+                        <div class="input-overlay-text_right">%</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="home_ins">Home insurance</label>
+                    <div class="zsg-input-overlay_right">
+                        <input required pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency"
+                               class="form-control" value="$1,260" name="home_ins" id="home_ins"/>
+                        <div class="zsg-input-overlay-text_right">/year</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="hoa_dues">HOA dues</label>
+                    <div class="zsg-input-overlay_right">
+                        <input required pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency"
+                               class="form-control" name="hoa_dues" id="hoa_dues" value="$0"/>
+                        <div class="zsg-input-overlay-text_right">/month</div>
+                    </div>
+                </div>
+                <p><small>Assumes PMI rate of of 0.5% for downpayment lower than 20%</small></p>
+            </div>
+            <div onclick="showHide()">
+                <a id="moreLess">More</a>
             </div>
         </div>
-        <div onclick="showHide()">
-            <a id="moreLess">More</a>
-        </div>
-    </div>
     <div class="col-6-md cen" id="donut"></div>
 </div>
 
@@ -561,7 +574,12 @@
         </div>
     </article>
     <div class="bottom-logo">
-        <a class="title" href="/"><img src="{{ STATIC_URL }}img/placeholder.png"></a>
+        <a class="title" href="/"><img src="{{ STATIC_URL }}img/poweredby.png"></a>
+    </div>
+    <div style="margin-top: 1em">
+        <p>
+            <sup>†</sup> Margin of error is at least 10 percent of the total value. Take care with this statistic.
+        </p>
     </div>
 {% endblock %}
 
@@ -746,6 +764,7 @@
                     geographyData: geographyData
                 }
                 try {
+                    console.log('here', chartstuff.chartData, chartstuff.chartData.value)
                     Charts[i] = Chart(chartstuff);
                 } catch (e) {
                     console.log("Error making chart " + chartID)
@@ -844,8 +863,7 @@
         var makeCitation = function (year, release) {
             var citation = '<p class="explain"><strong>Citation:</strong> ' +
                 'U.S. Census Bureau (<span id="cite-release-year">' + year + '</span>). ' +
-                '<em>American Community Survey <span id="cite-release">' + release + '</span> estimates.</em> ' +
-                'Retrieved from <em>Census Reporter Profile page for {% firstof geography.this.full_name|escapejs geography.this.short_name|escapejs %}</em> &lt;{{ canonical_url }}&gt;</p>';
+                '<em>American Community Survey <span id="cite-release">' + release + '</span> estimates.</em> ';
 
             $('.content-container').append(citation);
         }

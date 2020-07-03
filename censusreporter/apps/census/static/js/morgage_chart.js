@@ -1,4 +1,4 @@
-$("input[data-type='currency']").on({
+    $("input[data-type='currency']").on({
         keyup: function () {
             formatCurrency($(this));
         },
@@ -52,9 +52,9 @@ $("input[data-type='currency']").on({
             right_side = formatNumber(right_side);
 
             // On blur make sure 2 numbers after decimal
-            if (blur === "blur") {
+            /*if (blur === "blur") {
                 right_side += "00";
-            }
+            }*/
 
             // Limit decimal to only 2 digits
             right_side = right_side.substring(0, 2);
@@ -70,9 +70,9 @@ $("input[data-type='currency']").on({
             input_val = "$" + input_val;
 
             // final formatting
-            if (blur === "blur") {
+            /*if (blur === "blur") {
                 input_val += ".00";
-            }
+            }*/
         }
 
         // send updated string to input
@@ -121,9 +121,9 @@ $("input[data-type='currency']").on({
             right_side = formatNumber(right_side);
 
             // On blur make sure 2 numbers after decimal
-            if (blur === "blur") {
+            /*if (blur === "blur") {
                 right_side += "00";
-            }
+            }*/
 
             // Limit decimal to only 2 digits
             right_side = right_side.substring(0, 2);
@@ -139,9 +139,9 @@ $("input[data-type='currency']").on({
             input_val = "$" + input_val;
 
             // final formatting
-            if (blur === "blur") {
+            /*if (blur === "blur") {
                 input_val += ".00";
-            }
+            }*/
         }
 
         // send updated string to input
@@ -149,16 +149,15 @@ $("input[data-type='currency']").on({
 
     }
 
-
 function showHide() {
     var x = document.getElementById("inc_tax_div");
     var morLes = document.getElementById('moreLess')
     if (x.style.display === "none") {
         x.style.display = "block";
-        morLes.innerText = 'More';
+        morLes.innerText = 'Less';
     } else {
         x.style.display = "none";
-        morLes.innerText = 'Less';
+        morLes.innerText = 'More';
     }
 }
 
@@ -224,16 +223,22 @@ async function morgCalc() {
         }
     }
 
-    var homePriceValue = parseFloat(homePrice.value.replace('$', '').replace(/,/g, ''))
+    var h = homePrice.value === ''? 0: homePrice.value.replace('$', '').replace(/,/g, '')
+    var hi = homeInsurance.value ===''? 0: homeInsurance.value.replace('$', '').replace(/,/g, '')
+    var ho = HOA.value === ''? 0: HOA.value.replace('$', '').replace(/,/g, '')
+    var homePriceValue = parseFloat(h)
     var downPaymentValue = parseFloat(homePriceValue) * downPercent.value / 100
     var propertyTaxValue = parseFloat(homePriceValue) * propertyTaxpercent.value / 100
-    var homeInsuranceValue = parseFloat(homeInsurance.value.replace('$', '').replace(/,/g, ''))
-    var HOAvalue = parseFloat(HOA.value.replace('$', '').replace(/,/g, ''))
+    var homeInsuranceValue = parseFloat(hi)
+    var HOAvalue = parseFloat(ho)
     var interestRateValue = await getInterestRate(loanProgram)
+    var downPercentValue = parseFloat(downPercent.value)
+    var PMI = ((homePriceValue - downPaymentValue) * (0.5 / 100)) / 12
+    // console.log(PMI)
 
     interestRate.value = interestRateValue
     downPayment.value = formatCur(downPaymentValue);
-    propertyTax.value = formatCur(roundTo(propertyTaxValue, 2));
+    propertyTax.value = formatCur(Math.round(propertyTaxValue));
 
 
     var insurance = homeInsuranceValue / 12.0
@@ -245,29 +250,50 @@ async function morgCalc() {
     var A = (1 + monthlyInterestRate) ** noOfPayment
     var PnI = principal * ((monthlyInterestRate * A) / (A - 1))
 
-    var Total = includeTax.checked ? (PnI + insurance + taxes + (HOAvalue ? HOAvalue : 0)) : PnI;
+    var Total = includeTax.checked ? (PnI + insurance + taxes + (HOAvalue ? HOAvalue : 0) + (downPercent.value < 20 ? PMI : 0)) : PnI + (downPercent.value < 20 ? PMI : 0);
 
 
     d3.select("#donut").selectAll("svg").remove();
     var dataset = []
     if (includeTax.checked) {
-        dataset = HOAvalue ? [
-            {label: 'Taxes', count: Math.round(taxes)},
-            {label: 'Insurance', count: Math.round(insurance)},
-            {label: 'P&I', count: Math.round(PnI)},
-            {label: 'HOA', count: Math.round(HOAvalue)}
-        ] : [
-            {label: 'Taxes', count: Math.round(taxes)},
-            {label: 'Insurance', count: Math.round(insurance)},
-            {label: 'P&I', count: Math.round(PnI)}
-        ]
-    } else {
-        dataset = [{label: 'P&I', count: Math.round(PnI)}]
-    }
+        if (downPercentValue < 20) {
+            dataset = HOAvalue ? [
+                {label: 'Taxes', count: Math.round(taxes)},
+                {label: 'Insurance', count: Math.round(insurance)},
+                {label: 'P&I', count: Math.round(PnI)},
+                {label: 'PMI', count: Math.round(PMI)},
+                {label: 'HOA', count: Math.round(HOAvalue)}
+            ] : [
+                {label: 'Taxes', count: Math.round(taxes)},
+                {label: 'Insurance', count: Math.round(insurance)},
+                {label: 'PMI', count: Math.round(PMI)},
+                {label: 'P&I', count: Math.round(PnI)}
+            ]
+        } else {
+            dataset = HOAvalue ? [
+                {label: 'Taxes', count: Math.round(taxes)},
+                {label: 'Insurance', count: Math.round(insurance)},
+                {label: 'P&I', count: Math.round(PnI)},
+                {label: 'HOA', count: Math.round(HOAvalue)}
+            ] : [
+                {label: 'Taxes', count: Math.round(taxes)},
+                {label: 'Insurance', count: Math.round(insurance)},
+                {label: 'P&I', count: Math.round(PnI)}
+            ]
+        }
 
-    var width = 450,
-        height = 450,
-        radius = Math.min(width, height) / 2.5;
+    } else {
+        dataset = (downPercentValue < 20)? [
+                {label: 'P&I', count: Math.round(PnI)},
+                {label: 'PMI', count: Math.round(PMI)}
+                ]:
+            [{label: 'P&I', count: Math.round(PnI)}]
+    }
+    // console.log(dataset, downPercentValue)
+
+    var width = 350,
+        height = 350,
+        radius = Math.min(width - 50, height - 50) / 2.5;
 
     // Define arc colours
     var colour = d3.scale.linear()
@@ -281,8 +307,8 @@ async function morgCalc() {
 
     // Determine size of arcs
     var arc = d3.svg.arc()
-        .innerRadius(radius - 100)
-        .outerRadius(radius - 10);
+        .innerRadius(radius - 50)
+        .outerRadius(100);
 
     // Create the donut pie chart layout
     var pie = d3.layout.pie()
@@ -346,7 +372,7 @@ async function morgCalc() {
         .attr("class", "labels");
 
     // Append text labels to each arc
-    textG.append("text")
+    /*textG.append("text")
         .attr("transform", function (d) {
             return "translate(" + arc.centroid(d) + ")";
         })
@@ -355,7 +381,7 @@ async function morgCalc() {
         .attr("fill", "#fff")
         .text(function (d, i) {
             return d.data.count > 0 ? d.data.label : '';
-        });
+        });*/
 
     var legendG = mySvg.selectAll(".legend")
         .data(pie(dataset))
@@ -378,20 +404,22 @@ async function morgCalc() {
         })
         .style("font-size", 12)
         .attr("y", 10)
-        .attr("x", 11);
+        .attr("x", 16);
 
 
 }
 
 
-['change', 'blur', 'keypress'].forEach(function (e) {
+['change', 'blur', 'keyup', 'keypress'].forEach(function (e) {
     homePrice.addEventListener(e, morgCalc, false);
     downPayment.addEventListener(e, morgCalc);
     loanProgram.addEventListener(e, morgCalc, false);
     HOA.addEventListener(e, morgCalc, false);
     homeInsurance.addEventListener(e, morgCalc, false);
     propertyTaxpercent.addEventListener(e, morgCalc, false);
+    propertyTax.addEventListener(e, morgCalc, false);
     includeTax.addEventListener(e, morgCalc, false);
+    downPercent.addEventListener(e, morgCalc, false);
 })
 
 morgCalc()

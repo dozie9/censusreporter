@@ -610,7 +610,7 @@
         });
 
         // Make the header map
-        d3.json(CR_API_URL + '/1.0/geo/tiger2018/{{ geography.this.full_geoid }}?geom=true', function (error, json) {
+        d3.json('http://162.213.248.71' + '/1.0/geo/tiger2018/{{ geography.this.full_geoid }}?geom=true', function (error, json) {
             if (error) return console.warn(error);
             var allowMapDrag = (browserWidth > 480) ? true : false;
 
@@ -806,7 +806,7 @@
         // Update the header's list of parent geographies
         var parentLinkContainer = $('#header-box .caption'),
             parentLinksPrefix = '<span class="glossary-term">{{ geography.this.sumlevel_name|capfirst }}</span> in: ',
-            parentGeoAPI = 'localhost:5000'+ '/1.0/geo/tiger2018/' + thisGeoID + '/parents',
+            parentGeoAPI = 'http://162.213.248.71' + '/1.0/geo/tiger2018/' + thisGeoID + '/parents',
             tilesGeoAPI = 'https://embed.censusreporter.org/1.0/geo/tiger2018/tiles/' + thisSumlev + '/{z}/{x}/{y}.geojson';
 
         // for touch devices, still allow context toggle

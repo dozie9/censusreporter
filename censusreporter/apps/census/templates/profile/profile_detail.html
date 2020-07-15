@@ -592,6 +592,7 @@
     <!--<![endif]-->
     <script src="{{ STATIC_URL }}js/vendor/leaflet.label.js"></script>
     <script type="text/javascript">
+    var API_HOST = HOST + ':5000'
         // Allow Ajax POST requests to bypass Django's CSRF check
         // https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#ajax
         var csrftoken = '{{ csrf_token }}';
@@ -610,7 +611,7 @@
         });
 
         // Make the header map
-        d3.json(HOST + '/1.0/geo/tiger2018/{{ geography.this.full_geoid }}?geom=true', function (error, json) {
+        d3.json(API_HOST + '/1.0/geo/tiger2018/{{ geography.this.full_geoid }}?geom=true', function (error, json) {
             if (error) return console.warn(error);
             var allowMapDrag = (browserWidth > 480) ? true : false;
 
@@ -806,7 +807,7 @@
         // Update the header's list of parent geographies
         var parentLinkContainer = $('#header-box .caption'),
             parentLinksPrefix = '<span class="glossary-term">{{ geography.this.sumlevel_name|capfirst }}</span> in: ',
-            parentGeoAPI = HOST + '/1.0/geo/tiger2018/' + thisGeoID + '/parents',
+            parentGeoAPI = API_HOST + '/1.0/geo/tiger2018/' + thisGeoID + '/parents',
             tilesGeoAPI = 'https://embed.censusreporter.org/1.0/geo/tiger2018/tiles/' + thisSumlev + '/{z}/{x}/{y}.geojson';
 
         // for touch devices, still allow context toggle
